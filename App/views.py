@@ -15,6 +15,8 @@ def home(request):
 
 @login_required(login_url='login')
 def add_company(request):
+    last = request.META.get('HTTP_REFERER', None)
+
     if request.method == "POST":
 
         form = CompanyForm(request.POST)
@@ -25,7 +27,7 @@ def add_company(request):
             try:
                 post.save()
                 messages.success(request, 'Company Added Successfully !')
-                return redirect("/show")
+                return redirect(last)
             except Exception as e:
                 print(e)
     else:
