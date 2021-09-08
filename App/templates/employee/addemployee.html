@@ -2,9 +2,9 @@
 {% block title %} 
 
 {% if obj %}
-    Edit Company 
+    Edit Employee 
 {% else %}
-    Add Company
+    Add Employee
 {% endif %}
 {% endblock title %}
 
@@ -34,9 +34,9 @@
                         <div class="col-8">
                             <h3 class="mb-0">
                                 {% if obj %}
-                                    Edit Company 
+                                    Edit Employee 
                                 {% else %}
-                                    Add Company
+                                    Add Employee
                                 {% endif %}
                             </h3>
                         </div>
@@ -56,23 +56,23 @@
                     </div>
                     {% endfor %}
                     {% endif %}
-                    <form method="POST" action="/add/company/" class="forma">{% csrf_token %}
+                    <form method="POST" action="/add/employee/" class="forma">{% csrf_token %}
 
-                        <h5 class="heading-small text-white font-italic mb-4 text-center"><u>Company information</u>
+                        <h5 class="heading-small text-white font-italic mb-4 text-center"><u>Employee information</u>
                         </h5>
 
                         <div class="row text-white">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label">Company Name*</label>
-                                    {{form.cName}}
+                                    <label class="form-control-label">Firstname*</label>
+                                    {{form.eFname}}
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label">Company Email*</label>
-                                    {{form.cEmail}}
+                                    <label class="form-control-label">Lastname*</label>
+                                    {{form.eLname}}
                                 </div>
                             </div>
                         </div>
@@ -80,15 +80,32 @@
                         <div class="row text-white">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label">Logo*</label><br>
-                                    {{form.cLogo}}
+                                    <label class="form-control-label">Company*</label>
+                                    {{form.eCompany}}
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="form-control-label">Company Website*</label>
-                                    {{form.cUrl}}
+                                    <label class="form-control-label">Company not available?</label><br>
+                                    <button class="btn-warning btn-smw-100 " onclick="location.href='/add/company/'">Click Here</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row text-white">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Employee Email*</label>
+                                    {{form.eEmail}}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="form-control-label">Employee Phone*</label>
+                                    {{form.ePhone}}
                                 </div>
                             </div>
 
