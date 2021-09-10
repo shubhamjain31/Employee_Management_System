@@ -16,7 +16,7 @@ urlpatterns = [
     path('add/company/', views.add_company ,name='add_company'),
     path('show/company/', views.show_company ,name='show_company'),
     # path('edit/<str:cName>', views.edit ,name='employee_add'),
-    # path('update/<str:cName>', views.update ,name='employee_add'),
+    path('edit/company/<str:cName>', views.edit_company ,name='edit_company'),
     path('delete/company/<str:cName>', views.delete_company ,name='delete_company'), 
 
     # #employee paths
