@@ -41,6 +41,14 @@ def show_company(request):
     return render(request, "showcompany.html", {'companies':companies})
 
 @login_required(login_url='login')
+def delete_company(request, cName):
+    last = request.META.get('HTTP_REFERER', None)
+
+    company = Company.objects.get(cName=cName)
+    company.delete()
+    return redirect(last)
+
+@login_required(login_url='login')
 def add_employee(request):
     last = request.META.get('HTTP_REFERER', None)
 
@@ -65,3 +73,11 @@ def show_employee(request):
     employees   = Employee.objects.all()
 
     return render(request, "employee/showemployee.html", {'employees':employees})
+
+@login_required(login_url='login')
+def delete_employee(request, eFname):
+    last = request.META.get('HTTP_REFERER', None)
+
+    employee = Employee.objects.get(eFname=eFname)
+    employee.delete()
+    return redirect(last)

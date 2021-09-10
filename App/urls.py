@@ -17,12 +17,12 @@ urlpatterns = [
     path('show/company/', views.show_company ,name='show_company'),
     # path('edit/<str:cName>', views.edit ,name='employee_add'),
     # path('update/<str:cName>', views.update ,name='employee_add'),
-    # path('delete/<str:cName>', views.delete ,name='employee_add'), 
+    path('delete/company/<str:cName>', views.delete_company ,name='delete_company'), 
 
     # #employee paths
     path('add/employee/', views.add_employee ,name='add_employee'),
     path('show/employee/', views.show_employee ,name='show_employee'),
-    # path('deleteEmp/<str:eFname>', views.deleteEmp ,name='employee_add'),
+    path('delete/employee/<str:eFname>', views.delete_employee ,name='delete_employee'),
     # path('editemp/<str:eFname>', views.editemp ,name='employee_add'), 
     # path('updateEmp/<str:eFname>', views.updateEmp ,name='employee_add'),
 ]
