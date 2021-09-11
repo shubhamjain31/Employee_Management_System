@@ -25,7 +25,6 @@ class EmployeeForm(forms.ModelForm):
     eCompany = forms.ModelChoiceField(queryset=Company.objects.all(), empty_label='-----',
     to_field_name="cName", error_messages={
         'required'              : 'Please Select Company Name',
-        'invalid_choice'        : 'Please Select Valid Company',
     },
     widget=forms.Select(
         attrs={

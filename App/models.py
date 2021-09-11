@@ -18,10 +18,10 @@ class Company(models.Model):
         return self.cName
 
 class Employee(models.Model):
-    eFname 		   = models.CharField(primary_key='true',max_length=50,unique='true')
+    eFname 		   = models.CharField(max_length=50)
     eLname 		   = models.CharField(max_length=50)
     eCompany 	   = models.ForeignKey(Company, on_delete=models.CASCADE)
-    eEmail 		   = models.EmailField()
+    eEmail 		   = models.EmailField(primary_key='true', unique='true')
     ePhone 		   = models.CharField(max_length=50)
     date_created   = models.DateTimeField(auto_now_add=True, null=True)
 

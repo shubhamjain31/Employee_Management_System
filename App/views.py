@@ -93,11 +93,13 @@ def add_employee(request):
     if request.method == "POST":
         employee_email = request.POST.get('eEmail')
 
+        form = EmployeeForm(request.POST)
+        print(form)
+
         if Employee.objects.filter(eEmail__iexact=employee_email.strip()).exists():
             messages.error(request, "Employee With This Email Already Present")
-            return redirect('/add/employee')
+            return render(request, "employee/addemployee.html", {'form':form})
 
-        form = EmployeeForm(request.POST)
         if form.is_valid():
             post        = form.save(commit=False)
 
@@ -112,16 +114,46 @@ def add_employee(request):
     return render(request, "employee/addemployee.html", {'form':form})
 
 @login_required(login_url='login')
+def edit_employee(request, eEmail):
+    last = request.META.get('HTTP_REFERER', None)
+
+    employee = get_object_or_404(Employee, eEmail=eEmail)
+
+    form = EmployeeForm(request.POST or None, instance = employee)
+
+    if request.method == "POST":
+        employee_email = request.POST.get('eEmail')
+
+        all_employees_exclude_same = Employee.objects.filter(~Q(eEmail=eEmail))
+        if all_employees_exclude_same.filter(eEmail__iexact=employee_email).exists():
+            messages.error(request, "Employee With This Email Already Present")
+            return redirect('/edit/employee/'+eEmail)
+
+        if form.is_valid():
+            post        = form.save(commit=False)
+            post.user   = request.user
+
+            try:
+                post.save()
+                messages.success(request, 'Employee Updated Successfully !')
+                return redirect(last)
+            except Exception as e:
+                print(e)
+    else:
+        pass
+    return render(request, "employee/editemployee.html", {'form':form})
+
+@login_required(login_url='login')
 def show_employee(request):
     employees   = Employee.objects.all()
 
     return render(request, "employee/showemployee.html", {'employees':employees})
 
 @login_required(login_url='login')
-def delete_employee(request, eFname):
+def delete_employee(request, eEmail):
     last = request.META.get('HTTP_REFERER', None)
 
-    employee = Employee.objects.get(eFname=eFname)
+    employee = Employee.objects.get(eEmail=eEmail)
     employee.delete()
 
     messages.success(request, 'Employee deleted Successfully !')
