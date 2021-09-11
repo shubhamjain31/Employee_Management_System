@@ -15,7 +15,6 @@ urlpatterns = [
     #Company paths 
     path('add/company/', views.add_company ,name='add_company'),
     path('show/company/', views.show_company ,name='show_company'),
-    # path('edit/<str:cName>', views.edit ,name='employee_add'),
     path('edit/company/<str:cName>', views.edit_company ,name='edit_company'),
     path('delete/company/<str:cName>', views.delete_company ,name='delete_company'), 
 
@@ -23,8 +22,7 @@ urlpatterns = [
     path('add/employee/', views.add_employee ,name='add_employee'),
     path('show/employee/', views.show_employee ,name='show_employee'),
     path('delete/employee/<str:eEmail>', views.delete_employee ,name='delete_employee'),
-    path('edit/employee/<str:eEmail>', views.edit_employee ,name='edit_employee'), 
-    # path('updateEmp/<str:eFname>', views.updateEmp ,name='employee_add'),
+    path('edit/employee/<str:eEmail>', views.edit_employee ,name='edit_employee'),
 ]
 
 #for Media Storage 

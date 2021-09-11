@@ -21,11 +21,12 @@ def add_company(request):
     if request.method == "POST":
         company_name = request.POST.get('cName')
 
+        form = CompanyForm(request.POST)
+
         if Company.objects.filter(cName__iexact=company_name.strip()).exists():
             messages.error(request, "Company With This Name Already Present")
-            return redirect('/add/company')
+            return render(request, "index.html", {'form':form})
 
-        form = CompanyForm(request.POST)
         if form.is_valid():
             post        = form.save(commit=False)
             post.user   = request.user
