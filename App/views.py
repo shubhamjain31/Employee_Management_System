@@ -95,7 +95,6 @@ def add_employee(request):
         employee_email = request.POST.get('eEmail')
 
         form = EmployeeForm(request.POST)
-        print(form)
 
         if Employee.objects.filter(eEmail__iexact=employee_email.strip()).exists():
             messages.error(request, "Employee With This Email Already Present")
